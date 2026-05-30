@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Project</string>
+    <!-- themes.xml -->
+    <style name="Theme.FlowFi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/flowfi_accent</item>
+        <item name="colorPrimaryVariant">@color/flowfi_accent_dim</item>
+        <item name="colorSurface">@color/flowfi_card</item>
+        <item name="android:windowBackground">@color/flowfi_bg</item>
+        <item name="android:statusBarColor">@color/flowfi_bg</item>
+        <item name="android:navigationBarColor">@color/flowfi_bg</item>
+        <item name="cornerRadius">16dp</item>
+    </style>
+</resources>

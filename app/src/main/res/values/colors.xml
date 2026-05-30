@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <!-- colors.xml -->
+    <color name="flowfi_bg">#121212</color>
+    <color name="flowfi_card">#1E1E1E</color>
+    <color name="flowfi_card_elevated">#252525</color>
+    <color name="flowfi_accent">#00C853</color>
+    <color name="flowfi_accent_dim">#00A846</color>
+    <color name="flowfi_accent_soft">#1A3D2B</color>
+    <color name="flowfi_text_primary">#FFFFFF</color>
+    <color name="flowfi_text_secondary">#B0B0B0</color>
+    <color name="flowfi_text_hint">#666666</color>
+    <color name="flowfi_income">#00C853</color>
+    <color name="flowfi_expense">#FF5252</color>
+    <color name="flowfi_gold">#FFD740</color>
+    <color name="flowfi_divider">#2C2C2C</color>
+</resources>
