@@ -38,6 +38,7 @@ android {
 dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation(libs.appcompat)
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)

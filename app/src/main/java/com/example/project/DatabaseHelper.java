@@ -210,6 +210,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rows > 0;
     }
 
+    public boolean deleteGoal(int goalId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rows = db.delete("savings_goals", "id = ?",
+                new String[]{String.valueOf(goalId)});
+        db.close();
+        return rows > 0;
+    }
+
     // ── DASHBOARD METHODS ─────────────────────────────────────
 
     public Cursor getRecentTransactions(int userId, int limit) {
@@ -232,5 +240,107 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return streak;
+    }
+
+    // ── ANALYTICS METHODS ─────────────────────────────────────
+
+    public double getTotalByTypeSince(int userId, String type, String sinceDate) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT SUM(amount) FROM transactions " +
+                        "WHERE user_id = ? AND type = ? AND date >= ?",
+                new String[]{String.valueOf(userId), type, sinceDate});
+        double total = 0;
+        if (cursor.moveToFirst() && !cursor.isNull(0)) total = cursor.getDouble(0);
+        cursor.close();
+        db.close();
+        return total;
+    }
+
+    public Cursor getExpenseTotalsByCategory(int userId, String sinceDate) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(
+                "SELECT category, SUM(amount) as total FROM transactions " +
+                        "WHERE user_id = ? AND type = 'expense' AND date >= ? " +
+                        "GROUP BY category ORDER BY total DESC",
+                new String[]{String.valueOf(userId), sinceDate});
+    }
+
+    public Cursor getDailyTotals(int userId, String sinceDate) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(
+                "SELECT date, " +
+                        "SUM(CASE WHEN type='income'  THEN amount ELSE 0 END) as income, " +
+                        "SUM(CASE WHEN type='expense' THEN amount ELSE 0 END) as expense " +
+                        "FROM transactions WHERE user_id = ? AND date >= ? " +
+                        "GROUP BY date ORDER BY date ASC",
+                new String[]{String.valueOf(userId), sinceDate});
+    }
+
+    // ── CHALLENGE METHODS ─────────────────────────────────────
+
+    public boolean addChallenge(int userId, String title, String description,
+                                int targetDays, String startDate) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("user_id", userId);
+        cv.put("title", title);
+        cv.put("description", description);
+        cv.put("target_days", targetDays);
+        cv.put("current_streak", 0);
+        cv.put("best_streak", 0);
+        cv.put("is_active", 1);
+        cv.put("start_date", startDate);
+        long result = db.insert("challenges", null, cv);
+        db.close();
+        return result != -1;
+    }
+
+    public Cursor getAllChallenges(int userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery(
+                "SELECT * FROM challenges WHERE user_id = ? ORDER BY is_active DESC, start_date DESC",
+                new String[]{String.valueOf(userId)});
+    }
+
+    public boolean incrementStreak(int challengeId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        // Increment current_streak, update best_streak if needed
+        db.execSQL(
+                "UPDATE challenges SET " +
+                        "current_streak = current_streak + 1, " +
+                        "best_streak = MAX(best_streak, current_streak + 1) " +
+                        "WHERE id = ?",
+                new String[]{String.valueOf(challengeId)});
+        db.close();
+        return true;
+    }
+
+    public boolean resetStreak(int challengeId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("current_streak", 0);
+        int rows = db.update("challenges", cv, "id = ?",
+                new String[]{String.valueOf(challengeId)});
+        db.close();
+        return rows > 0;
+    }
+
+    public boolean deleteChallenge(int challengeId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rows = db.delete("challenges", "id = ?",
+                new String[]{String.valueOf(challengeId)});
+        db.close();
+        return rows > 0;
+    }
+
+    public boolean setChallengeActive(int challengeId, boolean active) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("is_active", active ? 1 : 0);
+        int rows = db.update("challenges", cv, "id = ?",
+                new String[]{String.valueOf(challengeId)});
+        db.close();
+        return rows > 0;
     }
 }
