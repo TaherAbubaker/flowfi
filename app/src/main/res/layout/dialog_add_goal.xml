@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#1E1E1E">
+
+    <EditText
+        android:id="@+id/etGoalTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Goal title (e.g. New Laptop)"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#666666"
+        android:backgroundTint="#00C853"
+        android:layout_marginBottom="12dp"/>
+
+    <EditText
+        android:id="@+id/etGoalTarget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Target amount ($)"
+        android:inputType="numberDecimal"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#666666"
+        android:backgroundTint="#00C853"
+        android:layout_marginBottom="12dp"/>
+
+    <EditText
+        android:id="@+id/etGoalDeadline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Deadline (YYYY-MM-DD) optional"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#666666"
+        android:backgroundTint="#00C853"/>
+
+</LinearLayout>
