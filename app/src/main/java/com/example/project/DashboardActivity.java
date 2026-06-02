@@ -175,7 +175,7 @@ public class DashboardActivity extends AppCompatActivity {
                 return true;
 
             } else if (id == R.id.nav_chatbot) {
-                startActivity(new Intent(this, ChatbotActivity.class));
+                startActivity(new Intent(this, ChallengesActivity.class));
                 overridePendingTransition(0, 0);
                 return true;
             }
