@@ -23,7 +23,7 @@
 
     <item
         android:id="@+id/nav_chatbot"
-        android:icon="@android:drawable/ic_menu_help"
+        android:icon="@android:drawable/ic_lock_lock"
         android:title="Challenges"/>
 
 </menu>
