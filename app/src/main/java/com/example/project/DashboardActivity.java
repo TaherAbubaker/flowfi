@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -43,6 +44,13 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        FloatingActionButton btnChatbot = findViewById(R.id.btnChatbot);
+
+        btnChatbot.setOnClickListener(v -> {
+            Intent intent = new Intent(DashboardActivity.this, ChatbotActivity.class);
+            startActivity(intent);
+        });
 
         db      = new DatabaseHelper(this);
         session = new SessionManager(this);
@@ -148,6 +156,7 @@ public class DashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(DashboardActivity.this,
                         TransactionHistoryActivity.class)));
     }
+
 
     private void setupBottomNav() {
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);

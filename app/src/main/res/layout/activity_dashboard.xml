@@ -6,12 +6,16 @@
     android:layout_height="match_parent"
     android:background="#121212">
 
+
+
     <!-- Scrollable content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:paddingBottom="80dp">
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -170,6 +174,8 @@
 
             </androidx.cardview.widget.CardView>
 
+
+
             <!-- ── STREAK CARD ── -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -294,6 +300,24 @@
         app:tint="#121212"
         app:elevation="22dp"/>
 
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnChatbot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="70dp"
+        android:contentDescription="Open Chatbot"
+        android:src="@android:drawable/ic_dialog_info"
+        app:backgroundTint="#00C853"
+        app:tint="#121212"/>
+
+
+
+
+
+
     <!-- ── BOTTOM NAVIGATION ── -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
@@ -304,5 +328,7 @@
         app:itemIconTint="@color/bottom_nav_colors"
         app:itemTextColor="@color/bottom_nav_colors"
         app:menu="@menu/bottom_nav_menu"/>
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
